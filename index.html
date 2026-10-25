@@ -1,0 +1,40 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#080d19">
+  <meta name="description" content="Bekkestua weather and transport dashboard">
+  <title>Bekkestua Ticket Dashboard</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" type="image/png" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+<main>
+  <section class="top">
+    <div class="panel">
+      <h2>Current weather · Bekkestua</h2>
+      <div class="weather"><div id="weather-icon">⏳</div><div><div id="temp">--°</div><div id="conditions">Loading weather…</div></div></div>
+      <div class="details"><div>Feels like<strong id="feels">--°</strong></div><div>Wind<strong id="wind">-- m/s</strong></div><div>Precipitation<strong id="rain">-- mm</strong></div></div>
+    </div>
+    <div class="panel clock-panel"><div id="clock">--:--</div><div id="date"></div></div>
+    <div class="panel"><h2>Duck assistant</h2><div class="assistant"><div class="duck">🦆</div><div><strong>Ready when you are</strong><span>Assistant placeholder<br>Voice connection not active.</span></div></div></div>
+  </section>
+  <section class="panel forecast">
+    <div class="forecast-header"><h2>Next 24 hours</h2><div class="forecast-key"><span><i class="key-swatch key-day" aria-hidden="true"></i>Daylight</span><span><i class="key-swatch key-night" aria-hidden="true"></i>Night</span></div></div>
+    <div class="chart"><canvas id="chart" role="img" aria-label="24-hour temperature and hourly precipitation forecast, with day and night shading"></canvas></div>
+    <div class="note" id="weather-status">Loading forecast…</div>
+  </section>
+  <section class="tickets" id="tickets" aria-label="Bekkestua departures"></section>
+  <p class="note footer" id="transport-status">Loading departures from Entur…</p>
+  <p class="note footer">Weather: Open-Meteo · Transport: Entur · Walk to station: 8 minutes<br>Transport times are expected departure times, including realtime estimates when available.</p>
+  <div class="app-tools"><button id="install" hidden>Install app</button><button id="refresh" type="button">Refresh data</button></div>
+  <p class="note" id="connection" role="status"></p>
+  <noscript>Enable JavaScript to use this dashboard.</noscript>
+</main>
+</body>
+</html>

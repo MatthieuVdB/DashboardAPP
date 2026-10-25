@@ -1,0 +1,1108 @@
+/* ==========================================================
+   1. THEME AND GLOBAL DEFAULTS
+   ========================================================== */
+
+:root {
+  color-scheme: dark;
+
+  --bg: #080d19;
+  --text: #f3f7ff;
+  --muted: #9aacc3;
+
+  --panel-bg: #121c2ddd;
+  --panel-border: #ffffff13;
+
+  --page-padding: 24px;
+  --layout-gap: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: var(--page-padding);
+  min-height: 100vh;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+
+  color: var(--text);
+
+  background:
+    radial-gradient(
+      ellipse at 12% 0,
+      #173c653d,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 90% 40%,
+      #30317b29,
+      transparent 50%
+    ),
+    var(--bg);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+}
+
+main > * {
+  min-width: 0;
+}
+
+.panel {
+  min-width: 0;
+  padding: 14px;
+
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+
+  background: var(--panel-bg);
+  box-shadow: 0 16px 40px #0003;
+}
+
+h2 {
+  margin: 0 0 17px;
+
+  font-size: 12px;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+
+  color: var(--muted);
+}
+
+.note {
+  margin: 0;
+
+  font-size: 11px;
+  line-height: 1.6;
+
+  color: var(--muted);
+}
+
+.footer {
+  text-align: center;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+
+/* ==========================================================
+   2. TOP ROW
+   Weather | Clock | Assistant
+   ========================================================== */
+
+.top {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--layout-gap);
+
+  margin: 0;
+}
+
+
+/* ==========================================================
+   3. CLOCK
+   ========================================================== */
+
+.clock-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+#clock {
+  font-size: 100px;
+  font-weight: 850;
+  font-variant-numeric: tabular-nums;
+
+  letter-spacing: -0.055em;
+  line-height: 1.1;
+
+  background: linear-gradient(#fff, #9cc9ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  color: transparent;
+}
+
+#date {
+  margin-top: 12px;
+
+  font-size: 25px;
+  color: var(--muted);
+}
+
+
+/* ==========================================================
+   4. CURRENT WEATHER
+   ========================================================== */
+
+.weather {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+#weather-icon {
+  font-size: 50px;
+}
+
+#temp {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+#conditions {
+  margin-top: 7px;
+
+  font-size: 14px;
+  color: #d4e6ff;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+
+  margin-top: 18px;
+}
+
+.details div {
+  padding: 10px 8px;
+
+  border: 1px solid #ffffff0a;
+  border-radius: 12px;
+
+  background: #ffffff05;
+
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.details strong {
+  display: block;
+  margin-top: 5px;
+
+  font-size: 14px;
+  color: var(--text);
+}
+
+
+/* ==========================================================
+   5. ASSISTANT
+   ========================================================== */
+
+.assistant {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  min-height: 135px;
+}
+
+.duck {
+  display: grid;
+  place-items: center;
+
+  flex: 0 0 76px;
+  height: 76px;
+
+  border-radius: 50%;
+  background: linear-gradient(145deg, #153982, #168ac3);
+
+  font-size: 40px;
+
+  animation: bob 5s ease-in-out infinite;
+}
+
+.assistant span {
+  display: block;
+  margin-top: 6px;
+
+  font-size: 13px;
+  line-height: 1.6;
+
+  color: var(--muted);
+}
+
+@keyframes bob {
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+
+/* ==========================================================
+   6. WEATHER FORECAST
+   ========================================================== */
+
+.forecast {
+  min-width: 0;
+  margin: 0;
+}
+
+.forecast-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.forecast-header h2 {
+  margin-bottom: 0;
+}
+
+.forecast-key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.forecast-key span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.key-swatch {
+  display: inline-block;
+
+  width: 13px;
+  height: 13px;
+
+  border: 1px solid #ffffff22;
+  border-radius: 4px;
+}
+
+.key-day {
+  background: #24354a;
+}
+
+.key-night {
+  background: #080f1d;
+}
+
+.chart {
+  position: relative;
+
+  min-width: 0;
+  height: 320px;
+
+  margin-top: 12px;
+}
+
+
+#weather-status {
+  margin-top: 8px;
+}
+
+
+/* ==========================================================
+   7. TICKET LIST
+   Always stacked vertically
+   ========================================================== */
+
+.tickets {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--layout-gap);
+
+  min-width: 0;
+}
+
+
+/* ==========================================================
+   8. TICKET SHAPE AND PROGRESS FILL
+   ========================================================== */
+
+.ticket {
+  --a: #1745a8;
+  --b: #448fff;
+  --progress: 0%;
+  --footer-height: 62px;
+  --ticket-radius: 25px;
+
+  position: relative;
+  isolation: isolate;
+
+  min-width: 0;
+  overflow: hidden;
+
+  border-radius: var(--ticket-radius);
+
+  background: linear-gradient(
+    130deg,
+    #142139,
+    #0f1727
+  );
+
+  filter: drop-shadow(0 12px 18px #0003);
+
+  /* Cut-out notches aligned with the footer divider. */
+  -webkit-mask-image:
+    radial-gradient(
+      circle 12px at 0 calc(100% - var(--footer-height)),
+      transparent 98%,
+      #000 100%
+    ),
+    radial-gradient(
+      circle 12px at 100% calc(100% - var(--footer-height)),
+      transparent 98%,
+      #000 100%
+    );
+
+  -webkit-mask-composite: source-in;
+
+  mask-image:
+    radial-gradient(
+      circle 12px at 0 calc(100% - var(--footer-height)),
+      transparent 98%,
+      #000 100%
+    ),
+    radial-gradient(
+      circle 12px at 100% calc(100% - var(--footer-height)),
+      transparent 98%,
+      #000 100%
+    );
+
+  mask-composite: intersect;
+}
+
+.ticket::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  border: 1px solid #ffffff17;
+  border-radius: var(--ticket-radius);
+
+  pointer-events: none;
+}
+
+.fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  z-index: -1;
+
+  width: var(--progress);
+
+  background: linear-gradient(
+    100deg,
+    var(--a),
+    var(--b)
+  );
+
+  transition: width 1s linear;
+}
+
+
+/* ==========================================================
+   9. TICKET CONTENT
+   Default layout for portrait and smaller screens
+   ========================================================== */
+
+.ticket-main {
+  min-height: 245px;
+  padding: 24px;
+}
+
+.route {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.icon {
+  flex: 0 0 24px;
+  font-size: 21px;
+}
+
+.badge {
+  flex: 0 0 auto;
+
+  min-width: 40px;
+  padding: 5px 9px;
+
+  border: 1px solid #ffffff20;
+  border-radius: 10px;
+
+  background: #ffffff22;
+
+  font-size: 16px;
+  font-weight: 850;
+  text-align: center;
+}
+
+.destination {
+  min-width: 0;
+  margin: 0;
+
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+}
+
+.departure {
+  margin-top: 22px;
+
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 54px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+
+  text-align: center;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 64px;
+  margin-top: 13px;
+
+  font-size: clamp(30px, 2.65vw, 34px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: 0;
+
+  text-align: center;
+}
+
+
+/* ==========================================================
+   10. TICKET FOOTER
+   ========================================================== */
+
+.ticket-footer {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  height: var(--footer-height);
+  padding: 0 26px;
+
+  background: #06112632;
+}
+
+.ticket-footer::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 19px;
+  right: 19px;
+
+  border-top: 1px dashed #d4e5ff70;
+}
+
+.next-label {
+  font-size: 15px;
+  font-weight: 750;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: #e0ebffbd;
+}
+
+.next-time {
+  flex: 0 0 auto;
+
+  font: 650 23px / 1 ui-monospace, Consolas, monospace;
+
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+}
+
+
+/* ==========================================================
+   11. TICKET TIMING STATES
+   ========================================================== */
+
+.warning {
+  --a: #8b570b;
+  --b: #d9a924;
+}
+
+.warning .status {
+  color: #fff3bd;
+}
+
+.leave-now {
+  --a: #921e25;
+  --b: #e44550;
+}
+
+.too-late {
+  --a: #420d14;
+  --b: #781f2a;
+}
+
+.too-late .status {
+  color: #ffb6bd;
+}
+
+.unavailable .status {
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.4;
+  letter-spacing: 0;
+
+  color: var(--muted);
+}
+
+.unavailable .next-time {
+  color: var(--muted);
+}
+
+
+/* ==========================================================
+   12. LEAVE NOW — RED GLOW
+   ========================================================== */
+
+.ticket.leave-now {
+  animation: leave-now-glow 1.6s ease-in-out infinite;
+}
+
+@keyframes leave-now-glow {
+  0%,
+  100% {
+    filter:
+      drop-shadow(0 12px 18px #0003)
+      drop-shadow(0 0 8px #ef444455);
+  }
+
+  50% {
+    filter:
+      drop-shadow(0 12px 18px #0003)
+      drop-shadow(0 0 24px #ef4444bb);
+  }
+}
+
+
+/* ==========================================================
+   13. APP CONTROLS AND CONNECTION STATUS
+   ========================================================== */
+
+.app-tools {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin: 0;
+}
+
+.app-tools button {
+  padding: 11px 17px;
+
+  border: 1px solid #ffffff24;
+  border-radius: 12px;
+
+  background: #183557;
+
+  font: 650 14px system-ui;
+  color: var(--text);
+
+  cursor: pointer;
+}
+
+.app-tools button:hover {
+  background: #21466f;
+}
+
+.app-tools button:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 3px;
+}
+
+#connection {
+  margin: 0;
+  text-align: center;
+}
+
+#connection:empty {
+  display: none;
+}
+
+
+/* ==========================================================
+   14. SMALLER SCREENS / PORTRAIT
+   ========================================================== */
+
+@media (max-width: 850px) {
+  body {
+    padding: 16px;
+  }
+
+  .top {
+    grid-template-columns: 1fr;
+  }
+
+  .clock-panel {
+    min-height: 175px;
+  }
+
+  .status {
+    font-size: 32px;
+  }
+
+  .unavailable .status {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 370px) {
+  #clock {
+    font-size: 86px;
+  }
+
+  .route {
+    gap: 6px;
+  }
+
+  .destination {
+    font-size: 16px;
+  }
+
+  .status {
+    font-size: 27px;
+  }
+
+  .unavailable .status {
+    font-size: 13px;
+  }
+
+  .next-label {
+    letter-spacing: 0.07em;
+  }
+}
+
+
+/* ==========================================================
+   15. LANDSCAPE DISPLAY
+   Smaller top row
+   Full-width forecast
+   Three thin tickets stacked below
+   ========================================================== */
+
+@media
+  (orientation: landscape)
+  and (min-width: 700px)
+  and (min-height: 420px) {
+
+  body {
+    padding: 10px;
+    min-height: 100dvh;
+  }
+
+  main {
+    gap: 8px;
+  }
+
+
+  /* Smaller top row */
+
+  .top {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .top > .panel {
+    min-height: 0;
+    padding: 10px 12px;
+
+    border-radius: 16px;
+  }
+
+  .top h2 {
+    margin-bottom: 6px;
+    font-size: 9px;
+  }
+
+  .clock-panel {
+    min-height: 0;
+  }
+
+  #clock {
+    font-size: 58px;
+    line-height: 1;
+  }
+
+  #date {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+
+  .weather {
+    gap: 10px;
+  }
+
+  #weather-icon {
+    font-size: 30px;
+  }
+
+  #temp {
+    font-size: 32px;
+  }
+
+  #conditions {
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .details {
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  .details div {
+    padding: 4px 6px;
+    font-size: 8px;
+  }
+
+  .details strong {
+    margin-top: 2px;
+    font-size: 11px;
+  }
+
+  .assistant {
+    min-height: 0;
+    gap: 10px;
+  }
+
+  .duck {
+    flex-basis: 44px;
+    height: 44px;
+    font-size: 25px;
+  }
+
+  .assistant strong {
+    font-size: 12px;
+  }
+
+  .assistant span {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.3;
+  }
+
+
+  /* Full-width forecast */
+
+  .forecast {
+    padding: 10px 12px;
+    border-radius: 16px;
+  }
+
+  .forecast-header {
+    gap: 6px;
+  }
+
+  .forecast-header h2 {
+    font-size: 10px;
+  }
+
+  .forecast-key {
+    gap: 10px;
+    font-size: 9px;
+  }
+
+  .chart {
+    height: clamp(220px, 42dvh, 340px);
+    margin-top: 4px;
+  }
+
+  #weather-status {
+    margin-top: 3px;
+
+    font-size: 9px;
+    line-height: 1.2;
+  }
+
+
+  /* Thin stacked tickets */
+
+  .tickets {
+    gap: 7px;
+  }
+
+  .ticket {
+    --footer-height: 27px;
+    --ticket-radius: 16px;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ticket-main {
+    display: grid;
+
+    grid-template-columns:
+      minmax(0, 1.35fr)
+      minmax(90px, 0.6fr)
+      minmax(0, 1fr);
+
+    grid-template-rows: auto;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 53px;
+    padding: 8px 18px;
+  }
+
+  .route {
+    grid-column: 1;
+    grid-row: 1;
+
+    gap: 8px;
+  }
+
+  .icon {
+    flex-basis: 22px;
+    font-size: 19px;
+  }
+
+  .badge {
+    min-width: 36px;
+    padding: 4px 8px;
+
+    border-radius: 8px;
+    font-size: 14px;
+  }
+
+  .destination {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .departure {
+    grid-column: 2;
+    grid-row: 1;
+
+    margin: 0;
+
+    font-size: 34px;
+    font-weight: 900;
+    line-height: 1;
+
+    text-align: center;
+  }
+
+  .status {
+    grid-column: 3;
+    grid-row: 1;
+
+    justify-content: flex-end;
+
+    min-height: 0;
+    margin: 0;
+
+    font-size: 25px;
+    font-weight: 800;
+    line-height: 1.1;
+
+    text-align: right;
+  }
+
+  .unavailable .status {
+    font-size: 11px;
+    line-height: 1.2;
+  }
+
+  .ticket-footer {
+    flex: 0 0 var(--footer-height);
+
+    padding: 0 20px;
+  }
+
+  .next-label {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+  }
+
+  .next-time {
+    font-size: 16px;
+  }
+
+
+  /* Compact footer and controls */
+
+  #transport-status,
+  main > .footer:not(#transport-status) {
+    font-size: 9px;
+    line-height: 1.3;
+  }
+
+  main > .footer:not(#transport-status) br {
+    display: none;
+  }
+
+  .app-tools {
+    gap: 8px;
+  }
+
+  .app-tools button {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 11px;
+  }
+
+  #connection {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+}
+
+
+/* ==========================================================
+   16. INSTALLED APP SAFE AREAS
+   ========================================================== */
+
+@media (display-mode: standalone) {
+  body {
+    padding-top: max(10px, env(safe-area-inset-top));
+    padding-bottom: max(10px, env(safe-area-inset-bottom));
+  }
+}
+
+
+/* ==========================================================
+   17. REDUCED MOTION
+   ========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .ticket.leave-now {
+    filter:
+      drop-shadow(0 12px 18px #0003)
+      drop-shadow(0 0 14px #ef444488);
+  }
+}
+
+/* ==========================================================
+   LANDSCAPE TICKET ORDER
+   Route | Truly centered leave message | Departure time
+   ========================================================== */
+
+@media
+  (orientation: landscape)
+  and (min-width: 700px)
+  and (min-height: 420px) {
+
+  .ticket-main {
+    grid-template-columns:
+      minmax(0, 1fr)
+      auto
+      minmax(0, 1fr);
+  }
+
+  .route {
+    grid-column: 1;
+    grid-row: 1;
+
+    justify-self: start;
+  }
+
+  .status {
+    grid-column: 2;
+    grid-row: 1;
+
+    justify-self: center;
+    justify-content: center;
+
+    margin: 0;
+
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .departure {
+    grid-column: 3;
+    grid-row: 1;
+
+    justify-self: end;
+
+    margin: 0;
+
+    text-align: right;
+  }
+}
+
+/* Hide the Daylight / Night key above the chart. */
+.forecast-key {
+  display: none;
+}
+
+/* Center the weather update message below the chart. */
+#weather-status {
+  width: 100%;
+  text-align: center;
+}
+
+/* Line colors */
+.line-150 {
+  background: #3ab821;
+  color: #ffffff;
+}
+
+.line-3 {
+  background: #f68b1f;
+  color: #ffffff;
+}
+
+
+.ticket-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: baseline;
+  gap: 8px;
+  padding-top: 4px;
+}
