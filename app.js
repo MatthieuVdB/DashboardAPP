@@ -15,8 +15,8 @@ const CONFIG = {
   weatherRefreshMs: 600_000,
   staleAfterMs: 120_000,
 
-  walkMinutes: 8,
-  yellowMinutes: 10,
+  walkMinutes: 9,
+  yellowMinutes: 11,
   tooLateMinutes: 7,
   tooLateSeconds: 30,
 
@@ -272,7 +272,7 @@ async function transport() {
 
     $("transport-status").textContent =
       `Entur updated at ${time(updated)} · ` +
-      "8-minute walk to Bekkestua";
+      "9-minute walk to Bekkestua";
   } catch (error) {
     $("transport-status").textContent =
       `Transport update failed: ${error.message}. ` +
@@ -663,12 +663,12 @@ function forecast(hourly, daily) {
       {
         time: interval.sunrise,
         label: "Sunrise",
-        color: "#f8d783"
+        color: "#1b1b1b"
       },
       {
         time: interval.sunset,
         label: "Sunset",
-        color: "#c4b5fd"
+        color: "#323233"
       }
     ])
     .filter(event => {
@@ -693,7 +693,8 @@ function forecast(hourly, daily) {
       ctx.save();
 
       // Nighttime base.
-      ctx.fillStyle = "#080f1d";
+      //ctx.fillStyle = "#080f1d";
+      ctx.fillStyle = "#eceee7";
 
       ctx.fillRect(
         left,
@@ -703,7 +704,8 @@ function forecast(hourly, daily) {
       );
 
       // Lighter daylight areas.
-      ctx.fillStyle = "#24354a";
+      //ctx.fillStyle = "#24354a";
+      ctx.fillStyle = "#d0d2c9";
 
       daylightIntervals.forEach(interval => {
         const visibleStart = Math.max(
@@ -820,8 +822,10 @@ function forecast(hourly, daily) {
           label: "Temperature °C",
           data: temperaturePoints,
 
-          borderColor: "#fbbf24",
-          backgroundColor: "#fbbf24",
+          //borderColor: "#fbbf24",
+          //backgroundColor: "#fbbf24",
+          borderColor: "#232722",
+          backgroundColor: "#232722",
 
           fill: false,
           tension: 0.35,
@@ -838,12 +842,15 @@ function forecast(hourly, daily) {
 
           label: "Precipitation mm",
           data: precipitationPoints,
-
-          backgroundColor: "#58a6efcc",
-          hoverBackgroundColor: "#7bc4ff",
-
-          borderColor: "#8acbff",
+          backgroundColor: "#777c7380",
+          hoverBackgroundColor: "#61665eaa",
+          borderColor: "#454a42",
           borderWidth: 1,
+
+          //backgroundColor: "#58a6efcc",
+          //hoverBackgroundColor: "#7bc4ff",
+          //borderColor: "#8acbff",
+          //borderWidth: 1,
           borderRadius: 4,
           borderSkipped: false,
 
@@ -949,7 +956,7 @@ function forecast(hourly, daily) {
 
           ticks: {
             stepSize: 2 * HOUR,
-            color: "#a8bad0",
+            color: "#181818",
             font: {
               size: 14,
               weight: "bold"
@@ -975,11 +982,13 @@ function forecast(hourly, daily) {
           title: {
             display: true,
             text: "Temperature °C",
-            color: "#fbbf24"
+            //color: "#fbbf24"
+            color: "#454a42",
           },
 
           ticks: {
-            color: "#fbbf24",
+            //color: "#fbbf24",
+            color: "#454a42",
             stepSize: 2,
             font: {
               size: 16,
@@ -1001,11 +1010,12 @@ function forecast(hourly, daily) {
           title: {
             display: true,
             text: "Precipitation mm / hour",
-            color: "#7bc4ff"
+            color: "#6f7a83"
           },
 
           ticks: {
-            color: "#7bc4ff",
+            //color: "#7bc4ff",
+            color: "#6f7a83",
             maxTicksLimit: 6,
             font: {
               size: 16,
