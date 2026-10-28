@@ -3,16 +3,26 @@
 /* 1. CONFIGURATION */
 const CONFIG = {
   stationId: "NSR:StopPlace:58281",
-  latitude: 59.917, longitude: 10.587, timeZone: "Europe/Oslo",
-  transportRefreshMs: 30_000, weatherRefreshMs: 600_000,
-  staleAfterMs: 120_000, walkMinutes: 8, yellowMinutes: 10,
-  tooLateMinutes: 7, tooLateSeconds: 30, blueFillWindowMinutes: 15
+  latitude: 59.917, 
+  longitude: 10.587, 
+  timeZone: "Europe/Oslo",
+  transportRefreshMs: 30_000, 
+  weatherRefreshMs: 600_000,
+  staleAfterMs: 120_000, 
+
+  walkMinutes: 9, 
+  yellowMinutes: 11,
+  tooLateMinutes: 7, 
+  tooLateSeconds: 30, 
+  blueFillWindowMinutes: 15
 };
+
 const routes = [
   { line: "150", destination: "Gullhaug", match: "Gullhaug", mode: "bus", icon: "🚌" },
   { line: "150", destination: "Nationaltheateret", match: "Nationaltheatret", mode: "bus", icon: "🚌" },
   { line: "3", destination: "Mortensrud", match: "Mortensrud", mode: "metro", icon: "🚇" }
 ];
+
 const INK = {
   background: "#111115", daylight: "#2c2b32", text: "#dedde1",
   muted: "#aaa8af", border: "#55545b", grid: "#ffffff0b",
@@ -38,7 +48,177 @@ routes.forEach((route, index) => {
   card.className = "ticket";
   card.id = `ticket-${index}`;
   card.innerHTML = `
-    <div class="fill"></div>
+    <div class="fill" aria-hidden="true">
+  ${
+    route.mode === "bus"
+      ? `
+        <svg class="bus-vehicle" viewBox="0 0 64 32" fill="none">
+          <!-- Side-view bus; front is on the right -->
+          <path
+            d="M5 5H49C53 5 56 8 57 12L60 23H4V9C4 7 4 6 5 5Z"
+            fill="var(--panel-bg)"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+
+          <!-- Passenger windows -->
+          <path
+            d="M9 9H18V16H9Z
+               M22 9H31V16H22Z
+               M35 9H44V16H35Z"
+            fill="currentColor"
+          />
+
+          <!-- Front windshield, facing right -->
+          <path
+            d="M49 9H50C52 9 53 10 54 13L55 16H49Z"
+            fill="currentColor"
+          />
+
+          <!-- Front door -->
+          <path
+            d="M46 18V23M50 18V23"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+
+          <!-- Headlight -->
+          <path
+            d="M57 19H60"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+
+          <!-- Wheels -->
+          <circle cx="15" cy="24" r="5" fill="currentColor"/>
+          <circle cx="49" cy="24" r="5" fill="currentColor"/>
+          <circle cx="15" cy="24" r="2" fill="var(--panel-bg)"/>
+          <circle cx="49" cy="24" r="2" fill="var(--panel-bg)"/>
+        </svg>
+      `
+      : `
+        <svg class="metro-vehicle" viewBox="0 0 128 32" fill="none">
+          <!-- Rear carriage -->
+          <path
+            d="M2 11H45V24H2Z"
+            fill="var(--panel-bg)"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+
+          <!-- Middle carriage -->
+          <path
+            d="M50 11H93V24H50Z"
+            fill="var(--panel-bg)"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+
+          <!-- Front carriage with sloping cab facing right -->
+          <path
+            d="M98 11H117L126 21V24H98Z"
+            fill="var(--panel-bg)"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+
+          <!-- Couplings -->
+          <path
+            d="M46 13V23
+              M94 13V23"
+            stroke="currentColor"
+            stroke-width="1.2"
+          />
+
+          <!-- Rear wagon: 3 windows -->
+          <path
+            d="M5 14H10V19H5Z
+              M15 14H20V19H15Z
+              M25 14H30V19H25Z
+              M35 14H40V19H35Z"
+            fill="currentColor"
+          />
+
+          <!-- Middle wagon: 3 windows -->
+          <path
+            d="M53 14H58V19H53Z
+              M63 14H68V19H63Z
+              M73 14H78V19H73Z
+              M83 14H88V19H83Z"
+            fill="currentColor"
+          />
+
+          <!-- Front wagon: 3 windows -->
+          <path
+            d="M101 14H106V19H101Z
+              M110 14H114V19H110Z"
+            fill="currentColor"
+          />
+
+          <!-- Driver windshield, facing right -->
+          <path
+            d="M118 14L124 20H118Z"
+            fill="currentColor"
+          />
+
+          <!-- Doors -->
+          <path
+            d="M13 13V23
+              M23 13V23
+              M33 13V23
+              M61 13V23
+              M71 13V23
+              M81 13V23
+              M109 13V23"
+            stroke="currentColor"
+            stroke-width="0.8"
+          />
+
+          <!-- Underframes -->
+          <path
+            d="M5 25H42
+              M53 25H90
+              M101 25H121"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+
+          <!-- Wheels -->
+          <g fill="currentColor">
+            <circle cx="7" cy="27" r="2"/>
+            <circle cx="12" cy="27" r="2"/>
+            <circle cx="20" cy="27" r="2"/>
+            <circle cx="25" cy="27" r="2"/>
+            <circle cx="33" cy="27" r="2"/>
+            <circle cx="40" cy="27" r="2"/>
+
+            <circle cx="55" cy="27" r="2"/>
+            <circle cx="60" cy="27" r="2"/>
+            <circle cx="68" cy="27" r="2"/>
+            <circle cx="73" cy="27" r="2"/>
+            <circle cx="81" cy="27" r="2"/>
+            <circle cx="88" cy="27" r="2"/>
+
+            <circle cx="103" cy="27" r="2"/>
+            <circle cx="108" cy="27" r="2"/>
+            <circle cx="116" cy="27" r="2"/>
+            <circle cx="121" cy="27" r="2"/>
+          </g>
+
+          <!-- Headlight -->
+          <path
+            d="M124 22H126"
+            stroke="currentColor"
+            stroke-width="1.5"
+          />
+        </svg>
+      `
+  }
+</div>
     <div class="ticket-main">
       <div class="route">
         <span class="icon" aria-hidden="true">${route.icon}</span>
