@@ -1,19 +1,31 @@
 /* ==========================================================
+   BEKKESTUA DASHBOARD — E-PAPER THEME
+   Existing layout preserved
+   No external fonts required
+   ========================================================== */
+
+
+/* ==========================================================
    1. THEME AND GLOBAL DEFAULTS
    ========================================================== */
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --bg: #080d19;
-  --text: #f3f7ff;
-  --muted: #9aacc3;
+  --bg: #e6e7e2;
+  --text: #232722;
+  --muted: #61665e;
 
-  --panel-bg: #121c2ddd;
-  --panel-border: #ffffff13;
+  --panel-bg: #eceee7;
+  --panel-border: #a5aaa0;
 
   --page-padding: 24px;
   --layout-gap: 14px;
+
+  --font:
+    "Lucida Console",
+    "Courier New",
+    monospace;
 }
 
 * {
@@ -25,27 +37,9 @@ body {
   padding: var(--page-padding);
   min-height: 100vh;
 
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-
+  font-family: var(--font);
   color: var(--text);
-
-  background:
-    radial-gradient(
-      ellipse at 12% 0,
-      #173c653d,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 90% 40%,
-      #30317b29,
-      transparent 50%
-    ),
-    var(--bg);
+  background: var(--bg);
 }
 
 main {
@@ -67,17 +61,18 @@ main > * {
   padding: 14px;
 
   border: 1px solid var(--panel-border);
-  border-radius: 24px;
+  border-radius: 2px;
 
   background: var(--panel-bg);
-  box-shadow: 0 16px 40px #0003;
+  box-shadow: none;
 }
 
 h2 {
   margin: 0 0 17px;
 
   font-size: 12px;
-  letter-spacing: 0.13em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 
   color: var(--muted);
@@ -129,24 +124,22 @@ h2 {
 }
 
 #clock {
+  font-family: var(--font);
   font-size: 100px;
-  font-weight: 850;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 
-  letter-spacing: -0.055em;
+  letter-spacing: -0.06em;
   line-height: 1.1;
 
-  background: linear-gradient(#fff, #9cc9ff);
-  background-clip: text;
-  -webkit-background-clip: text;
-
-  color: transparent;
+  background: none;
+  color: var(--text);
 }
 
 #date {
   margin-top: 12px;
 
-  font-size: 25px;
+  font-size: 22px;
   color: var(--muted);
 }
 
@@ -163,19 +156,21 @@ h2 {
 
 #weather-icon {
   font-size: 50px;
+  filter: grayscale(1);
 }
 
 #temp {
   font-size: 48px;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
+  letter-spacing: -0.06em;
 }
 
 #conditions {
   margin-top: 7px;
 
   font-size: 14px;
-  color: #d4e6ff;
+  color: var(--text);
 }
 
 .details {
@@ -189,10 +184,11 @@ h2 {
 .details div {
   padding: 10px 8px;
 
-  border: 1px solid #ffffff0a;
-  border-radius: 12px;
+  border: 0;
+  border-top: 1px solid var(--panel-border);
+  border-radius: 0;
 
-  background: #ffffff05;
+  background: transparent;
 
   font-size: 11px;
   color: var(--muted);
@@ -203,6 +199,7 @@ h2 {
   margin-top: 5px;
 
   font-size: 14px;
+  font-weight: 700;
   color: var(--text);
 }
 
@@ -226,12 +223,18 @@ h2 {
   flex: 0 0 76px;
   height: 76px;
 
-  border-radius: 50%;
-  background: linear-gradient(145deg, #153982, #168ac3);
+  border: 1px solid var(--panel-border);
+  border-radius: 2px;
+
+  background: transparent;
 
   font-size: 40px;
+  filter: grayscale(1);
+  animation: none;
+}
 
-  animation: bob 5s ease-in-out infinite;
+.assistant strong {
+  font-weight: 700;
 }
 
 .assistant span {
@@ -242,12 +245,6 @@ h2 {
   line-height: 1.6;
 
   color: var(--muted);
-}
-
-@keyframes bob {
-  50% {
-    transform: translateY(-5px);
-  }
 }
 
 
@@ -273,36 +270,7 @@ h2 {
 }
 
 .forecast-key {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.forecast-key span {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.key-swatch {
-  display: inline-block;
-
-  width: 13px;
-  height: 13px;
-
-  border: 1px solid #ffffff22;
-  border-radius: 4px;
-}
-
-.key-day {
-  background: #24354a;
-}
-
-.key-night {
-  background: #080f1d;
+  display: none;
 }
 
 .chart {
@@ -314,9 +282,18 @@ h2 {
   margin-top: 12px;
 }
 
+/*
+  Temporary e-paper treatment for the existing canvas.
+  The chart colors are currently defined in app.js.
+*/
+#chart {
+  filter: grayscale(1) invert(1);
+}
 
 #weather-status {
+  width: 100%;
   margin-top: 8px;
+  text-align: center;
 }
 
 
@@ -335,15 +312,12 @@ h2 {
 
 
 /* ==========================================================
-   8. TICKET SHAPE AND PROGRESS FILL
+   8. TICKET SHAPE AND PROGRESS
    ========================================================== */
 
 .ticket {
-  --a: #1745a8;
-  --b: #448fff;
   --progress: 0%;
   --footer-height: 62px;
-  --ticket-radius: 25px;
 
   position: relative;
   isolation: isolate;
@@ -351,78 +325,41 @@ h2 {
   min-width: 0;
   overflow: hidden;
 
-  border-radius: var(--ticket-radius);
+  border: 1px solid var(--panel-border);
+  border-radius: 2px;
 
-  background: linear-gradient(
-    130deg,
-    #142139,
-    #0f1727
-  );
+  background: var(--panel-bg);
 
-  filter: drop-shadow(0 12px 18px #0003);
+  filter: none;
+  animation: none;
 
-  /* Cut-out notches aligned with the footer divider. */
-  -webkit-mask-image:
-    radial-gradient(
-      circle 12px at 0 calc(100% - var(--footer-height)),
-      transparent 98%,
-      #000 100%
-    ),
-    radial-gradient(
-      circle 12px at 100% calc(100% - var(--footer-height)),
-      transparent 98%,
-      #000 100%
-    );
-
-  -webkit-mask-composite: source-in;
-
-  mask-image:
-    radial-gradient(
-      circle 12px at 0 calc(100% - var(--footer-height)),
-      transparent 98%,
-      #000 100%
-    ),
-    radial-gradient(
-      circle 12px at 100% calc(100% - var(--footer-height)),
-      transparent 98%,
-      #000 100%
-    );
-
-  mask-composite: intersect;
+  -webkit-mask-image: none;
+  mask-image: none;
 }
 
 .ticket::after {
-  content: "";
-
-  position: absolute;
-  inset: 0;
-
-  border: 1px solid #ffffff17;
-  border-radius: var(--ticket-radius);
-
-  pointer-events: none;
+  content: none;
 }
 
+/* A fine progress strip replaces the colored full-card fill. */
 .fill {
   position: absolute;
-  inset: 0 auto 0 0;
-  z-index: -1;
+  inset: auto auto 0 0;
+  z-index: 1;
 
   width: var(--progress);
+  height: 3px;
 
-  background: linear-gradient(
-    100deg,
-    var(--a),
-    var(--b)
-  );
+  background: var(--text);
 
+  pointer-events: none;
   transition: width 1s linear;
 }
 
 
 /* ==========================================================
    9. TICKET CONTENT
-   Default layout for portrait and smaller screens
+   Portrait / smaller screens
    ========================================================== */
 
 .ticket-main {
@@ -441,7 +378,9 @@ h2 {
 
 .icon {
   flex: 0 0 24px;
+
   font-size: 21px;
+  filter: grayscale(1);
 }
 
 .badge {
@@ -450,14 +389,22 @@ h2 {
   min-width: 40px;
   padding: 5px 9px;
 
-  border: 1px solid #ffffff20;
-  border-radius: 10px;
+  border: 1px solid var(--text);
+  border-radius: 1px;
 
-  background: #ffffff22;
+  background: transparent;
+  color: var(--text);
 
   font-size: 16px;
-  font-weight: 850;
+  font-weight: 700;
   text-align: center;
+}
+
+/* Intentionally monochrome for this theme. */
+.badge.line-150,
+.badge.line-3 {
+  background: transparent;
+  color: var(--text);
 }
 
 .destination {
@@ -465,27 +412,21 @@ h2 {
   margin: 0;
 
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.2;
-  letter-spacing: -0.035em;
+  letter-spacing: -0.04em;
 }
 
 .departure {
   margin-top: 22px;
 
-  font-family:
-    Inter,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    sans-serif;
-
+  font-family: var(--font);
   font-size: 54px;
-  font-weight: 900;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
 
   line-height: 1.1;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.06em;
 
   text-align: center;
 }
@@ -498,10 +439,9 @@ h2 {
   min-height: 64px;
   margin-top: 13px;
 
-  font-size: clamp(30px, 2.65vw, 34px);
-  font-weight: 800;
+  font-size: clamp(26px, 2.65vw, 32px);
+  font-weight: 700;
   line-height: 1.15;
-  letter-spacing: 0;
 
   text-align: center;
 }
@@ -509,6 +449,7 @@ h2 {
 
 /* ==========================================================
    10. TICKET FOOTER
+   Next bus at immediately left of its time
    ========================================================== */
 
 .ticket-footer {
@@ -516,77 +457,100 @@ h2 {
 
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: flex-end;
+  gap: 8px;
 
   height: var(--footer-height);
   padding: 0 26px;
 
-  background: #06112632;
+  border-top: 1px solid var(--panel-border);
+  background: transparent;
 }
 
 .ticket-footer::before {
-  content: "";
-
-  position: absolute;
-  top: 0;
-  left: 19px;
-  right: 19px;
-
-  border-top: 1px dashed #d4e5ff70;
+  content: none;
 }
 
 .next-label {
-  font-size: 15px;
-  font-weight: 750;
-  letter-spacing: 0.15em;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 
-  color: #e0ebffbd;
+  color: var(--muted);
 }
 
 .next-time {
   flex: 0 0 auto;
 
-  font: 650 23px / 1 ui-monospace, Consolas, monospace;
+  font-family: var(--font);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
   white-space: nowrap;
 }
 
 
 /* ==========================================================
-   11. TICKET TIMING STATES
+   11. TIMING STATES
+   Monochrome, no glowing or flashing
    ========================================================== */
 
-.warning {
-  --a: #8b570b;
-  --b: #d9a924;
+.ticket.warning {
+  border-color: var(--text);
 }
 
 .warning .status {
-  color: #fff3bd;
+  color: var(--text);
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
-.leave-now {
-  --a: #921e25;
-  --b: #e44550;
+.ticket.leave-now {
+  border-color: var(--text);
+  background: var(--text);
+  color: var(--panel-bg);
+
+  filter: none;
+  animation: none;
 }
 
-.too-late {
-  --a: #420d14;
-  --b: #781f2a;
+.ticket.leave-now .badge {
+  border-color: var(--panel-bg);
+  background: transparent;
+  color: var(--panel-bg);
+}
+
+.ticket.leave-now .next-label,
+.ticket.leave-now .next-time,
+.ticket.leave-now .status {
+  color: var(--panel-bg);
+}
+
+.ticket.leave-now .ticket-footer {
+  border-top-color: #eceee766;
+}
+
+.ticket.leave-now .fill {
+  background: var(--panel-bg);
+}
+
+.ticket.too-late {
+  border-color: var(--text);
 }
 
 .too-late .status {
-  color: #ffb6bd;
+  color: var(--muted);
+  text-decoration: line-through;
 }
 
 .unavailable .status {
   font-size: 13px;
-  font-weight: 650;
+  font-weight: 400;
   line-height: 1.4;
-  letter-spacing: 0;
 
   color: var(--muted);
 }
@@ -597,31 +561,7 @@ h2 {
 
 
 /* ==========================================================
-   12. LEAVE NOW — RED GLOW
-   ========================================================== */
-
-.ticket.leave-now {
-  animation: leave-now-glow 1.6s ease-in-out infinite;
-}
-
-@keyframes leave-now-glow {
-  0%,
-  100% {
-    filter:
-      drop-shadow(0 12px 18px #0003)
-      drop-shadow(0 0 8px #ef444455);
-  }
-
-  50% {
-    filter:
-      drop-shadow(0 12px 18px #0003)
-      drop-shadow(0 0 24px #ef4444bb);
-  }
-}
-
-
-/* ==========================================================
-   13. APP CONTROLS AND CONNECTION STATUS
+   12. APP CONTROLS AND CONNECTION STATUS
    ========================================================== */
 
 .app-tools {
@@ -636,23 +576,26 @@ h2 {
 .app-tools button {
   padding: 11px 17px;
 
-  border: 1px solid #ffffff24;
-  border-radius: 12px;
+  border: 1px solid var(--panel-border);
+  border-radius: 2px;
 
-  background: #183557;
-
-  font: 650 14px system-ui;
+  background: transparent;
   color: var(--text);
+
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
 
   cursor: pointer;
 }
 
 .app-tools button:hover {
-  background: #21466f;
+  background: var(--text);
+  color: var(--panel-bg);
 }
 
 .app-tools button:focus-visible {
-  outline: 2px solid #93c5fd;
+  outline: 2px solid var(--text);
   outline-offset: 3px;
 }
 
@@ -667,7 +610,7 @@ h2 {
 
 
 /* ==========================================================
-   14. SMALLER SCREENS / PORTRAIT
+   13. SMALLER SCREENS / PORTRAIT
    ========================================================== */
 
 @media (max-width: 850px) {
@@ -684,7 +627,7 @@ h2 {
   }
 
   .status {
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .unavailable .status {
@@ -694,7 +637,7 @@ h2 {
 
 @media (max-width: 370px) {
   #clock {
-    font-size: 86px;
+    font-size: 78px;
   }
 
   .route {
@@ -706,22 +649,18 @@ h2 {
   }
 
   .status {
-    font-size: 27px;
+    font-size: 24px;
   }
 
   .unavailable .status {
     font-size: 13px;
   }
-
-  .next-label {
-    letter-spacing: 0.07em;
-  }
 }
 
 
 /* ==========================================================
-   15. LANDSCAPE DISPLAY
-   Smaller top row
+   14. LANDSCAPE DISPLAY
+   Compact top row
    Full-width forecast
    Three thin tickets stacked below
    ========================================================== */
@@ -740,9 +679,6 @@ h2 {
     gap: 8px;
   }
 
-
-  /* Smaller top row */
-
   .top {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 8px;
@@ -751,8 +687,7 @@ h2 {
   .top > .panel {
     min-height: 0;
     padding: 10px 12px;
-
-    border-radius: 16px;
+    border-radius: 2px;
   }
 
   .top h2 {
@@ -771,7 +706,7 @@ h2 {
 
   #date {
     margin-top: 5px;
-    font-size: 14px;
+    font-size: 13px;
   }
 
   .weather {
@@ -827,12 +762,9 @@ h2 {
     line-height: 1.3;
   }
 
-
-  /* Full-width forecast */
-
   .forecast {
     padding: 10px 12px;
-    border-radius: 16px;
+    border-radius: 2px;
   }
 
   .forecast-header {
@@ -843,11 +775,6 @@ h2 {
     font-size: 10px;
   }
 
-  .forecast-key {
-    gap: 10px;
-    font-size: 9px;
-  }
-
   .chart {
     height: clamp(220px, 42dvh, 340px);
     margin-top: 4px;
@@ -855,13 +782,9 @@ h2 {
 
   #weather-status {
     margin-top: 3px;
-
     font-size: 9px;
     line-height: 1.2;
   }
-
-
-  /* Thin stacked tickets */
 
   .tickets {
     gap: 7px;
@@ -869,23 +792,22 @@ h2 {
 
   .ticket {
     --footer-height: 27px;
-    --ticket-radius: 16px;
 
     display: flex;
     flex-direction: column;
   }
 
+  /* Route | Centered leave message | Departure */
   .ticket-main {
     display: grid;
 
     grid-template-columns:
-      minmax(0, 1.35fr)
-      minmax(90px, 0.6fr)
+      minmax(0, 1fr)
+      auto
       minmax(0, 1fr);
 
     grid-template-rows: auto;
     align-items: center;
-
     gap: 12px;
 
     min-height: 53px;
@@ -895,6 +817,7 @@ h2 {
   .route {
     grid-column: 1;
     grid-row: 1;
+    justify-self: start;
 
     gap: 8px;
   }
@@ -908,66 +831,65 @@ h2 {
     min-width: 36px;
     padding: 4px 8px;
 
-    border-radius: 8px;
+    border-radius: 1px;
     font-size: 14px;
   }
 
   .destination {
-    font-size: 18px;
-    font-weight: 600;
+    font-size: 17px;
+    font-weight: 700;
   }
 
   .departure {
-    grid-column: 2;
+    grid-column: 3;
     grid-row: 1;
+    justify-self: end;
 
     margin: 0;
 
     font-size: 34px;
-    font-weight: 900;
     line-height: 1;
-
-    text-align: center;
-  }
-
-  .status {
-    grid-column: 3;
-    grid-row: 1;
-
-    justify-content: flex-end;
-
-    min-height: 0;
-    margin: 0;
-
-    font-size: 25px;
-    font-weight: 800;
-    line-height: 1.1;
 
     text-align: right;
   }
 
+  .status {
+    grid-column: 2;
+    grid-row: 1;
+
+    justify-self: center;
+    justify-content: center;
+
+    min-height: 0;
+    margin: 0;
+
+    font-size: 23px;
+    line-height: 1.1;
+
+    text-align: center;
+    white-space: nowrap;
+  }
+
   .unavailable .status {
+    max-width: 250px;
     font-size: 11px;
     line-height: 1.2;
+    white-space: normal;
   }
 
   .ticket-footer {
     flex: 0 0 var(--footer-height);
-
     padding: 0 20px;
   }
 
   .next-label {
     font-size: 10px;
-    letter-spacing: 0.06em;
+    letter-spacing: 0;
   }
 
   .next-time {
     font-size: 16px;
   }
-
-
-  /* Compact footer and controls */
 
   #transport-status,
   main > .footer:not(#transport-status) {
@@ -985,7 +907,7 @@ h2 {
 
   .app-tools button {
     padding: 5px 10px;
-    border-radius: 8px;
+    border-radius: 2px;
     font-size: 11px;
   }
 
@@ -997,19 +919,21 @@ h2 {
 
 
 /* ==========================================================
-   16. INSTALLED APP SAFE AREAS
+   15. INSTALLED APP SAFE AREAS
    ========================================================== */
 
-@media (display-mode: standalone) {
+@media (display-mode: standalone), (display-mode: fullscreen) {
   body {
     padding-top: max(10px, env(safe-area-inset-top));
     padding-bottom: max(10px, env(safe-area-inset-bottom));
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
   }
 }
 
 
 /* ==========================================================
-   17. REDUCED MOTION
+   16. REDUCED MOTION
    ========================================================== */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1019,90 +943,55 @@ h2 {
     animation: none !important;
     transition: none !important;
   }
-
-  .ticket.leave-now {
-    filter:
-      drop-shadow(0 12px 18px #0003)
-      drop-shadow(0 0 14px #ef444488);
-  }
 }
 
-/* ==========================================================
-   LANDSCAPE TICKET ORDER
-   Route | Truly centered leave message | Departure time
-   ========================================================== */
-
-@media
-  (orientation: landscape)
-  and (min-width: 700px)
-  and (min-height: 420px) {
-
-  .ticket-main {
-    grid-template-columns:
-      minmax(0, 1fr)
-      auto
-      minmax(0, 1fr);
-  }
-
-  .route {
-    grid-column: 1;
-    grid-row: 1;
-
-    justify-self: start;
-  }
-
-  .status {
-    grid-column: 2;
-    grid-row: 1;
-
-    justify-self: center;
-    justify-content: center;
-
-    margin: 0;
-
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .departure {
-    grid-column: 3;
-    grid-row: 1;
-
-    justify-self: end;
-
-    margin: 0;
-
-    text-align: right;
-  }
+/* Current weather: main information left, details right */
+.top > .panel:first-child {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px 16px;
+  align-items: center;
 }
 
-/* Hide the Daylight / Night key above the chart. */
-.forecast-key {
-  display: none;
+.top > .panel:first-child > h2 {
+  grid-column: 1 / -1;
 }
 
-/* Center the weather update message below the chart. */
-#weather-status {
-  width: 100%;
-  text-align: center;
+.top > .panel:first-child .weather {
+  grid-column: 1;
+  grid-row: 2;
 }
 
-/* Line colors */
-.line-150 {
-  background: #3ab821;
-  color: #ffffff;
+.top > .panel:first-child .details {
+  grid-column: 2;
+  grid-row: 2;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+
+  margin-top: 0;
+  padding-left: 12px;
+  border-left: 1px solid var(--panel-border);
 }
 
-.line-3 {
-  background: #f68b1f;
-  color: #ffffff;
+.top > .panel:first-child .details div {
+  padding: 0;
+  border: 0;
+  background: transparent;
 }
 
+.top > .panel:first-child .details strong {
+  margin-top: 2px;
+}
 
-.ticket-footer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: baseline;
-  gap: 8px;
-  padding-top: 4px;
+/* Invert the complete e-paper dashboard */
+html {
+  background: #19181d;
+  filter: invert(1);
+}
+
+/* Use the page-wide inversion only */
+#chart {
+  filter: none;
 }
