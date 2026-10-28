@@ -1,997 +1,141 @@
-/* ==========================================================
-   BEKKESTUA DASHBOARD — E-PAPER THEME
-   Existing layout preserved
-   No external fonts required
-   ========================================================== */
-
-
-/* ==========================================================
-   1. THEME AND GLOBAL DEFAULTS
-   ========================================================== */
-
+/* BEKKESTUA DASHBOARD — NATIVE DARK E-PAPER */
 :root {
-  color-scheme: light;
-
-  --bg: #e6e7e2;
-  --text: #232722;
-  --muted: #61665e;
-
-  --panel-bg: #eceee7;
-  --panel-border: #a5aaa0;
-
-  --page-padding: 24px;
-  --layout-gap: 14px;
-
-  --font:
-    "Lucida Console",
-    "Courier New",
-    monospace;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: var(--page-padding);
-  min-height: 100vh;
-
-  font-family: var(--font);
-  color: var(--text);
-  background: var(--bg);
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-
-  width: 100%;
-  max-width: 1280px;
-  margin: auto;
-}
-
-main > * {
-  min-width: 0;
-}
-
-.panel {
-  min-width: 0;
-  padding: 14px;
-
-  border: 1px solid var(--panel-border);
-  border-radius: 2px;
-
-  background: var(--panel-bg);
-  box-shadow: none;
-}
-
-h2 {
-  margin: 0 0 17px;
-
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-
-  color: var(--muted);
-}
-
-.note {
-  margin: 0;
-
-  font-size: 11px;
-  line-height: 1.6;
-
-  color: var(--muted);
-}
-
-.footer {
-  text-align: center;
-}
-
-[hidden] {
-  display: none !important;
-}
-
-
-/* ==========================================================
-   2. TOP ROW
-   Weather | Clock | Assistant
-   ========================================================== */
-
-.top {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--layout-gap);
-
-  margin: 0;
-}
-
-
-/* ==========================================================
-   3. CLOCK
-   ========================================================== */
-
-.clock-panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-
-  text-align: center;
-}
-
-#clock {
-  font-family: var(--font);
-  font-size: 100px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-
-  letter-spacing: -0.06em;
-  line-height: 1.1;
-
-  background: none;
-  color: var(--text);
-}
-
-#date {
-  margin-top: 12px;
-
-  font-size: 22px;
-  color: var(--muted);
-}
-
-
-/* ==========================================================
-   4. CURRENT WEATHER
-   ========================================================== */
-
-.weather {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-#weather-icon {
-  font-size: 50px;
-  filter: grayscale(1);
-}
-
-#temp {
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 1;
-  letter-spacing: -0.06em;
-}
-
-#conditions {
-  margin-top: 7px;
-
-  font-size: 14px;
-  color: var(--text);
-}
-
-.details {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 8px;
-
-  margin-top: 18px;
-}
-
-.details div {
-  padding: 10px 8px;
-
-  border: 0;
-  border-top: 1px solid var(--panel-border);
-  border-radius: 0;
-
-  background: transparent;
-
-  font-size: 11px;
-  color: var(--muted);
-}
-
-.details strong {
-  display: block;
-  margin-top: 5px;
-
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-
-/* ==========================================================
-   5. ASSISTANT
-   ========================================================== */
-
-.assistant {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-
-  min-height: 135px;
-}
-
-.duck {
-  display: grid;
-  place-items: center;
-
-  flex: 0 0 76px;
-  height: 76px;
-
-  border: 1px solid var(--panel-border);
-  border-radius: 2px;
-
-  background: transparent;
-
-  font-size: 40px;
-  filter: grayscale(1);
-  animation: none;
-}
-
-.assistant strong {
-  font-weight: 700;
-}
-
-.assistant span {
-  display: block;
-  margin-top: 6px;
-
-  font-size: 13px;
-  line-height: 1.6;
-
-  color: var(--muted);
-}
-
-
-/* ==========================================================
-   6. WEATHER FORECAST
-   ========================================================== */
-
-.forecast {
-  min-width: 0;
-  margin: 0;
-}
-
-.forecast-header {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-
-.forecast-header h2 {
-  margin-bottom: 0;
-}
-
-.forecast-key {
-  display: none;
-}
-
-.chart {
-  position: relative;
-
-  min-width: 0;
-  height: 320px;
-
-  margin-top: 12px;
-}
-
-/*
-  Temporary e-paper treatment for the existing canvas.
-  The chart colors are currently defined in app.js.
-*/
-#chart {
-  filter: grayscale(1) invert(1);
-}
-
-#weather-status {
-  width: 100%;
-  margin-top: 8px;
-  text-align: center;
-}
-
-
-/* ==========================================================
-   7. TICKET LIST
-   Always stacked vertically
-   ========================================================== */
-
-.tickets {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: var(--layout-gap);
-
-  min-width: 0;
-}
-
-
-/* ==========================================================
-   8. TICKET SHAPE AND PROGRESS
-   ========================================================== */
-
-.ticket {
-  --progress: 0%;
-  --footer-height: 62px;
-
-  position: relative;
-  isolation: isolate;
-
-  min-width: 0;
-  overflow: hidden;
-
-  border: 1px solid var(--panel-border);
-  border-radius: 2px;
-
-  background: var(--panel-bg);
-
-  filter: none;
-  animation: none;
-
-  -webkit-mask-image: none;
-  mask-image: none;
-}
-
-.ticket::after {
-  content: none;
-}
-
-/* A fine progress strip replaces the colored full-card fill. */
-.fill {
-  position: absolute;
-  inset: auto auto 0 0;
-  z-index: 1;
-
-  width: var(--progress);
-  height: 3px;
-
-  background: var(--text);
-
-  pointer-events: none;
-  transition: width 1s linear;
-}
-
-
-/* ==========================================================
-   9. TICKET CONTENT
-   Portrait / smaller screens
-   ========================================================== */
-
-.ticket-main {
-  min-height: 245px;
-  padding: 24px;
-}
-
-.route {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-
-  min-width: 0;
-  white-space: nowrap;
-}
-
-.icon {
-  flex: 0 0 24px;
-
-  font-size: 21px;
-  filter: grayscale(1);
-}
-
-.badge {
-  flex: 0 0 auto;
-
-  min-width: 40px;
-  padding: 5px 9px;
-
-  border: 1px solid var(--text);
-  border-radius: 1px;
-
-  background: transparent;
-  color: var(--text);
-
-  font-size: 50px;
-  font-weight: 700;
-  text-align: center;
-}
-
-/* Intentionally monochrome for this theme. */
-.badge.line-150,
-.badge.line-3 {
-  background: transparent;
-  color: var(--text);
-}
-
-.destination {
-  min-width: 0;
-  margin: 0;
-
-  font-size: 40px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.04em;
-}
-
-.departure {
-  margin-top: 22px;
-
-  font-family: var(--font);
-  font-size: 54px;
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-
-  line-height: 1.1;
-  letter-spacing: -0.06em;
-
-  text-align: center;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  min-height: 64px;
-  margin-top: 13px;
-
-  font-size: clamp(26px, 2.65vw, 32px);
-  font-weight: 700;
-  line-height: 1.15;
-
-  text-align: center;
-}
-
-
-/* ==========================================================
-   10. TICKET FOOTER
-   Next bus at immediately left of its time
-   ========================================================== */
-
-.ticket-footer {
-  position: relative;
-
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 8px;
-
-  height: var(--footer-height);
-  padding: 0 26px;
-
-  border-top: 1px solid var(--panel-border);
-  background: transparent;
-}
-
-.ticket-footer::before {
-  content: none;
-}
-
-.next-label {
-  font-size: 13px;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-
-  color: var(--muted);
-}
-
-.next-time {
-  flex: 0 0 auto;
-
-  font-family: var(--font);
-  font-size: 23px;
-  font-weight: 700;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-
-  letter-spacing: -0.04em;
-  white-space: nowrap;
-}
-
-
-/* ==========================================================
-   11. TIMING STATES
-   Monochrome, no glowing or flashing
-   ========================================================== */
-
-.ticket.warning {
-  border-color: var(--text);
-}
-
-.warning .status {
-  color: var(--text);
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-
-.ticket.leave-now {
-  border-color: var(--text);
-  background: var(--text);
-  color: var(--panel-bg);
-
-  filter: none;
-  animation: none;
-}
-
-.ticket.leave-now .badge {
-  border-color: var(--panel-bg);
-  background: transparent;
-  color: var(--panel-bg);
-}
-
-.ticket.leave-now .next-label,
-.ticket.leave-now .next-time,
-.ticket.leave-now .status {
-  color: var(--panel-bg);
-}
-
-.ticket.leave-now .ticket-footer {
-  border-top-color: #eceee766;
-}
-
-.ticket.leave-now .fill {
-  background: var(--panel-bg);
-}
-
-.ticket.too-late {
-  border-color: var(--text);
-}
-
-.too-late .status {
-  color: var(--muted);
-  text-decoration: line-through;
-}
-
-.unavailable .status {
-  font-size: 13px;
-  font-weight: 400;
-  line-height: 1.4;
-
-  color: var(--muted);
-}
-
-.unavailable .next-time {
-  color: var(--muted);
-}
-
-
-/* ==========================================================
-   12. APP CONTROLS AND CONNECTION STATUS
-   ========================================================== */
-
-.app-tools {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 10px;
-
-  margin: 0;
-}
-
-.app-tools button {
-  padding: 11px 17px;
-
-  border: 1px solid var(--panel-border);
-  border-radius: 2px;
-
-  background: transparent;
-  color: var(--text);
-
-  font-family: var(--font);
-  font-size: 13px;
-  font-weight: 700;
-
-  cursor: pointer;
-}
-
-.app-tools button:hover {
-  background: var(--text);
-  color: var(--panel-bg);
-}
-
-.app-tools button:focus-visible {
-  outline: 2px solid var(--text);
-  outline-offset: 3px;
-}
-
-#connection {
-  margin: 0;
-  text-align: center;
-}
-
-#connection:empty {
-  display: none;
-}
-
-
-/* ==========================================================
-   13. SMALLER SCREENS / PORTRAIT
-   ========================================================== */
-
-@media (max-width: 850px) {
-  body {
-    padding: 16px;
-  }
-
-  .top {
-    grid-template-columns: 1fr;
-  }
-
-  .clock-panel {
-    min-height: 175px;
-  }
-
-  .status {
-    font-size: 28px;
-  }
-
-  .unavailable .status {
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 370px) {
-  #clock {
-    font-size: 78px;
-  }
-
-  .route {
-    gap: 6px;
-  }
-
-  .destination {
-    font-size: 16px;
-  }
-
-  .status {
-    font-size: 24px;
-  }
-
-  .unavailable .status {
-    font-size: 13px;
-  }
-}
-
-
-/* ==========================================================
-   14. LANDSCAPE DISPLAY
-   Compact top row
-   Full-width forecast
-   Three thin tickets stacked below
-   ========================================================== */
-
-@media
-  (orientation: landscape)
-  and (min-width: 700px)
-  and (min-height: 420px) {
-
-  body {
-    padding: 10px;
-    min-height: 100dvh;
-  }
-
-  main {
-    gap: 8px;
-  }
-
-  .top {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  .top > .panel {
-    min-height: 0;
-    padding: 10px 12px;
-    border-radius: 2px;
-  }
-
-  .top h2 {
-    margin-bottom: 6px;
-    font-size: 9px;
-  }
-
-  .clock-panel {
-    min-height: 0;
-  }
-
-  #clock {
-    font-size: 58px;
-    line-height: 1;
-  }
-
-  #date {
-    margin-top: 5px;
-    font-size: 13px;
-  }
-
-  .weather {
-    gap: 10px;
-  }
-
-  #weather-icon {
-    font-size: 30px;
-  }
-
-  #temp {
-    font-size: 32px;
-  }
-
-  #conditions {
-    margin-top: 2px;
-    font-size: 11px;
-  }
-
-  .details {
-    gap: 5px;
-    margin-top: 6px;
-  }
-
-  .details div {
-    padding: 4px 6px;
-    font-size: 8px;
-  }
-
-  .details strong {
-    margin-top: 2px;
-    font-size: 11px;
-  }
-
-  .assistant {
-    min-height: 0;
-    gap: 10px;
-  }
-
-  .duck {
-    flex-basis: 44px;
-    height: 44px;
-    font-size: 25px;
-  }
-
-  .assistant strong {
-    font-size: 12px;
-  }
-
-  .assistant span {
-    margin-top: 3px;
-    font-size: 10px;
-    line-height: 1.3;
-  }
-
-  .forecast {
-    padding: 10px 12px;
-    border-radius: 2px;
-  }
-
-  .forecast-header {
-    gap: 6px;
-  }
-
-  .forecast-header h2 {
-    font-size: 10px;
-  }
-
-  .chart {
-    height: clamp(220px, 42dvh, 340px);
-    margin-top: 4px;
-  }
-
-  #weather-status {
-    margin-top: 3px;
-    font-size: 9px;
-    line-height: 1.2;
-  }
-
-  .tickets {
-    gap: 7px;
-  }
-
-  .ticket {
-    --footer-height: 27px;
-
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* Route | Centered leave message | Departure */
-  .ticket-main {
-    display: grid;
-
-    grid-template-columns:
-      minmax(0, 1fr)
-      auto
-      minmax(0, 1fr);
-
-    grid-template-rows: auto;
-    align-items: center;
-    gap: 12px;
-
-    min-height: 53px;
-    padding: 8px 18px;
-  }
-
-  .route {
-    grid-column: 1;
-    grid-row: 1;
-    justify-self: start;
-
-    gap: 8px;
-  }
-
-  .icon {
-    flex-basis: 22px;
-    font-size: 19px;
-  }
-
-  .badge {
-    min-width: 36px;
-    padding: 4px 8px;
-
-    border-radius: 1px;
-    font-size: 14px;
-  }
-
-  .destination {
-    font-size: 17px;
-    font-weight: 700;
-  }
-
-  .departure {
-    grid-column: 3;
-    grid-row: 1;
-    justify-self: end;
-
-    margin: 0;
-
-    font-size: 34px;
-    line-height: 1;
-
-    text-align: right;
-  }
-
-  .status {
-    grid-column: 2;
-    grid-row: 1;
-
-    justify-self: center;
-    justify-content: center;
-
-    min-height: 0;
-    margin: 0;
-
-    font-size: 23px;
-    line-height: 1.1;
-
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .unavailable .status {
-    max-width: 250px;
-    font-size: 11px;
-    line-height: 1.2;
-    white-space: normal;
-  }
-
-  .ticket-footer {
-    flex: 0 0 var(--footer-height);
-    padding: 0 20px;
-  }
-
-  .next-label {
-    font-size: 10px;
-    letter-spacing: 0;
-  }
-
-  .next-time {
-    font-size: 16px;
-  }
-
-  #transport-status,
-  main > .footer:not(#transport-status) {
-    font-size: 9px;
-    line-height: 1.3;
-  }
-
-  main > .footer:not(#transport-status) br {
-    display: none;
-  }
-
-  .app-tools {
-    gap: 8px;
-  }
-
-  .app-tools button {
-    padding: 5px 10px;
-    border-radius: 2px;
-    font-size: 11px;
-  }
-
-  #connection {
-    font-size: 10px;
-    line-height: 1.3;
-  }
-}
-
-
-/* ==========================================================
-   15. INSTALLED APP SAFE AREAS
-   ========================================================== */
-
-@media (display-mode: standalone), (display-mode: fullscreen) {
-  body {
-    padding-top: max(10px, env(safe-area-inset-top));
-    padding-bottom: max(10px, env(safe-area-inset-bottom));
-    padding-left: max(10px, env(safe-area-inset-left));
-    padding-right: max(10px, env(safe-area-inset-right));
-  }
-}
-
-
-/* ==========================================================
-   16. REDUCED MOTION
-   ========================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-/* Current weather: main information left, details right */
-.top > .panel:first-child {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: 8px 16px;
-  align-items: center;
-}
-
-.top > .panel:first-child > h2 {
-  grid-column: 1 / -1;
-}
-
-.top > .panel:first-child .weather {
-  grid-column: 1;
-  grid-row: 2;
-}
-
-.top > .panel:first-child .details {
-  grid-column: 2;
-  grid-row: 2;
-
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 6px;
-
-  margin-top: 0;
-  padding-left: 12px;
-  border-left: 1px solid var(--panel-border);
-}
-
-.top > .panel:first-child .details div {
-  padding: 0;
-  border: 0;
-  background: transparent;
-}
-
-.top > .panel:first-child .details strong {
-  margin-top: 2px;
-}
-
-/* Invert the complete e-paper dashboard */
-html {
-  background: #19181d;
-  filter: invert(1);
-}
-
-/* Use the page-wide inversion only */
-#chart {
-  filter: none;
+  color-scheme: dark;
+  --bg:#111115; --text:#dedde1; --muted:#aaa8af;
+  --panel-bg:#111115; --panel-border:#55545b;
+  --page-padding:24px; --layout-gap:14px;
+  --font:"Lucida Console","Courier New",monospace;
+}
+* { box-sizing:border-box; }
+html { background:var(--bg); filter:none; }
+body { margin:0; padding:var(--page-padding); min-height:100vh; font-family:var(--font); color:var(--text); background:var(--bg); }
+main { display:flex; flex-direction:column; gap:10px; width:100%; max-width:1280px; margin:auto; }
+main > * { min-width:0; }
+.panel { min-width:0; padding:14px; border:1px solid var(--panel-border); border-radius:2px; background:var(--panel-bg); }
+h2 { margin:0 0 17px; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+.note { margin:0; font-size:11px; line-height:1.6; color:var(--muted); }
+.footer { text-align:center; }
+[hidden] { display:none !important; }
+.top { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--layout-gap); margin:0; }
+.clock-panel { display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; }
+#clock { font-family:var(--font); font-size:100px; font-weight:700; font-variant-numeric:tabular-nums; letter-spacing:-.06em; line-height:1.1; color:var(--text); }
+#date { margin-top:12px; font-size:22px; color:var(--muted); }
+.weather { display:flex; align-items:center; gap:16px; }
+#weather-icon { font-size:50px; filter:grayscale(1); }
+#temp { font-size:48px; font-weight:700; line-height:1; letter-spacing:-.06em; }
+#conditions { margin-top:7px; font-size:14px; color:var(--text); }
+.details { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:18px; }
+.details div { padding:10px 8px; border-top:1px solid var(--panel-border); font-size:11px; color:var(--muted); }
+.details strong { display:block; margin-top:5px; font-size:14px; color:var(--text); }
+/* Current weather: conditions left, details in a right-hand column. */
+.top > .panel:first-child { display:grid; grid-template-columns:minmax(0,1fr) auto; gap:8px 16px; align-items:center; }
+.top > .panel:first-child > h2 { grid-column:1 / -1; }
+.top > .panel:first-child .weather { grid-column:1; grid-row:2; }
+.top > .panel:first-child .details { grid-column:2; grid-row:2; grid-template-columns:1fr; gap:6px; margin-top:0; padding-left:12px; border-left:1px solid var(--panel-border); }
+.top > .panel:first-child .details div { padding:0; border:0; }
+.top > .panel:first-child .details strong { margin-top:2px; }
+.assistant { display:flex; align-items:center; gap:16px; min-height:135px; }
+.duck { display:grid; place-items:center; flex:0 0 76px; height:76px; border:1px solid var(--panel-border); border-radius:2px; background:transparent; font-size:40px; filter:grayscale(1); }
+.assistant strong { font-weight:700; }
+.assistant span { display:block; margin-top:6px; font-size:13px; line-height:1.6; color:var(--muted); }
+.forecast { min-width:0; margin:0; }
+.forecast-header { display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+.forecast-header h2 { margin-bottom:0; }
+.forecast-key { display:none; }
+.chart { position:relative; min-width:0; height:320px; margin-top:12px; }
+#chart { filter:none; }
+#weather-status { width:100%; margin-top:8px; text-align:center; }
+.tickets { display:grid; grid-template-columns:minmax(0,1fr); gap:var(--layout-gap); min-width:0; }
+.ticket { --progress:0%; --footer-height:62px; position:relative; isolation:isolate; min-width:0; overflow:hidden; border:1px solid var(--panel-border); border-radius:2px; background:var(--panel-bg); color:var(--text); }
+.fill { position:absolute; inset:auto auto 0 0; z-index:1; width:var(--progress); height:3px; background:var(--text); pointer-events:none; transition:width 1s linear; }
+.ticket-main { min-height:245px; padding:24px; }
+.route { display:flex; align-items:center; gap:9px; min-width:0; white-space:nowrap; }
+.icon { flex:0 0 24px; font-size:21px; filter:grayscale(1); }
+.badge { flex:0 0 auto; min-width:40px; padding:5px 9px; border:1px solid var(--text); border-radius:1px; background:transparent; color:var(--text); font-size:16px; font-weight:700; text-align:center; }
+.destination { min-width:0; margin:0; font-size:20px; font-weight:700; line-height:1.2; letter-spacing:-.04em; }
+.departure { margin-top:22px; font-family:var(--font); font-size:54px; font-weight:700; font-variant-numeric:tabular-nums; line-height:1.1; letter-spacing:-.06em; text-align:center; }
+.status { display:flex; align-items:center; justify-content:center; min-height:64px; margin-top:13px; font-size:clamp(26px,2.65vw,32px); font-weight:700; line-height:1.15; text-align:center; }
+.ticket-footer { position:relative; display:flex; align-items:center; justify-content:flex-end; gap:8px; height:var(--footer-height); padding:0 26px; border-top:1px solid var(--panel-border); }
+.next-label { font-size:13px; font-weight:400; letter-spacing:.02em; text-transform:uppercase; color:var(--muted); }
+.next-time { flex:0 0 auto; font-family:var(--font); font-size:23px; font-weight:700; line-height:1; font-variant-numeric:tabular-nums; letter-spacing:-.04em; white-space:nowrap; }
+.ticket.warning { border-color:var(--text); }
+.warning .status { text-decoration:underline; text-underline-offset:4px; }
+.ticket.leave-now { background:#dedde1; border-color:#dedde1; color:#111115; }
+.ticket.leave-now .badge { border-color:#111115; color:#111115; }
+.ticket.leave-now .next-label,.ticket.leave-now .next-time,.ticket.leave-now .status { color:#111115; }
+.ticket.leave-now .ticket-footer { border-top-color:#87858e; }
+.ticket.leave-now .fill { background:#111115; }
+.ticket.too-late { border-color:var(--text); }
+.too-late .status { color:var(--muted); text-decoration:line-through; }
+.unavailable .status { font-size:13px; font-weight:400; line-height:1.4; color:var(--muted); }
+.unavailable .next-time { color:var(--muted); }
+.app-tools { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin:0; }
+.app-tools button { padding:11px 17px; border:1px solid var(--panel-border); border-radius:2px; background:transparent; color:var(--text); font-family:var(--font); font-size:13px; font-weight:700; cursor:pointer; }
+.app-tools button:hover { background:var(--text); color:var(--bg); }
+.app-tools button:focus-visible { outline:2px solid var(--text); outline-offset:3px; }
+#connection { margin:0; text-align:center; }
+#connection:empty { display:none; }
+@media (max-width:850px) {
+  body { padding:16px; }
+  .top { grid-template-columns:1fr; }
+  .clock-panel { min-height:175px; }
+  .status { font-size:28px; }
+  .unavailable .status { font-size:13px; }
+}
+@media (max-width:370px) {
+  #clock { font-size:78px; }
+  .route { gap:6px; }
+  .destination { font-size:16px; }
+  .status { font-size:24px; }
+  .unavailable .status { font-size:13px; }
+}
+@media (orientation:landscape) and (min-width:700px) and (min-height:420px) {
+  body { padding:10px; min-height:100dvh; }
+  main { gap:8px; }
+  .top { grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+  .top > .panel { min-height:0; padding:10px 12px; }
+  .top h2 { margin-bottom:6px; font-size:9px; }
+  .clock-panel { min-height:0; }
+  #clock { font-size:58px; line-height:1; }
+  #date { margin-top:5px; font-size:13px; }
+  .weather { gap:10px; }
+  #weather-icon { font-size:30px; }
+  #temp { font-size:32px; }
+  #conditions { margin-top:2px; font-size:11px; }
+  .details { gap:5px; margin-top:6px; }
+  .details div { padding:4px 6px; font-size:8px; }
+  .details strong { margin-top:2px; font-size:11px; }
+  .assistant { min-height:0; gap:10px; }
+  .duck { flex-basis:44px; height:44px; font-size:25px; }
+  .assistant strong { font-size:12px; }
+  .assistant span { margin-top:3px; font-size:10px; line-height:1.3; }
+  .forecast { padding:10px 12px; }
+  .forecast-header { gap:6px; }
+  .forecast-header h2 { font-size:10px; }
+  .chart { height:clamp(220px,42dvh,340px); margin-top:4px; }
+  #weather-status { margin-top:3px; font-size:9px; line-height:1.2; }
+  .tickets { gap:7px; }
+  .ticket { --footer-height:27px; display:flex; flex-direction:column; }
+  .ticket-main { display:grid; grid-template-columns:minmax(0,1fr) auto minmax(0,1fr); grid-template-rows:auto; align-items:center; gap:12px; min-height:53px; padding:8px 18px; }
+  .route { grid-column:1; grid-row:1; justify-self:start; gap:8px; }
+  .icon { flex-basis:22px; font-size:19px; }
+  .badge { min-width:36px; padding:4px 8px; font-size:14px; }
+  .destination { font-size:17px; }
+  .departure { grid-column:3; grid-row:1; justify-self:end; margin:0; font-size:34px; line-height:1; text-align:right; }
+  .status { grid-column:2; grid-row:1; justify-self:center; justify-content:center; min-height:0; margin:0; font-size:23px; line-height:1.1; text-align:center; white-space:nowrap; }
+  .unavailable .status { max-width:250px; font-size:11px; line-height:1.2; white-space:normal; }
+  .ticket-footer { flex:0 0 var(--footer-height); padding:0 20px; }
+  .next-label { font-size:10px; letter-spacing:0; }
+  .next-time { font-size:16px; }
+  #transport-status,main > .footer:not(#transport-status) { font-size:9px; line-height:1.3; }
+  main > .footer:not(#transport-status) br { display:none; }
+  .app-tools { gap:8px; }
+  .app-tools button { padding:5px 10px; font-size:11px; }
+  #connection { font-size:10px; line-height:1.3; }
+}
+@media (display-mode:standalone),(display-mode:fullscreen) {
+  body { padding-top:max(10px,env(safe-area-inset-top)); padding-bottom:max(10px,env(safe-area-inset-bottom)); padding-left:max(10px,env(safe-area-inset-left)); padding-right:max(10px,env(safe-area-inset-right)); }
+}
+@media (prefers-reduced-motion:reduce) {
+  *,*::before,*::after { animation:none !important; transition:none !important; }
 }
